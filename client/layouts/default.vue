@@ -1,11 +1,11 @@
 <template>
 	<v-layout>
 		<v-app>
-			<Navigation />
+			<AppNavigation />
 			<v-main>
 				<slot />
 			</v-main>
-			<Footer />
+			<AppFooter />
 		</v-app>
 	</v-layout>
 </template>
