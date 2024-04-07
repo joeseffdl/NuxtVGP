@@ -24,17 +24,7 @@
 				</strong>
 			</NuxtLink>
 		</v-row>
-		<template #append>
-			<v-app-bar-nav-icon />
-		</template>
 	</v-app-bar>
-	<!-- <v-navigation-drawer location="right">
-      <v-list>
-        <v-list-item title="Home"></v-list-item>
-        <v-list-item title="Launches"></v-list-item>
-        <v-list-item title="Rockets"></v-list-item>
-      </v-list>
-    </v-navigation-drawer> -->
 </template>
 
 <script setup>
@@ -43,6 +33,7 @@ const navigation = [
 	{ name: 'Home', href: '/', current: route.name === 'index' },
 	{ name: 'Launches', href: '/launches', current: route.name === 'launches' },
 	{ name: 'Rockets', href: '/rockets', current: route.name.includes('rockets') },
+	{ name: 'Favorites', href: '/favorites', current: route.name === 'favorites' },
 ]
 </script>
 
