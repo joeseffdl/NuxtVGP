@@ -58,7 +58,7 @@
 						{{ rocketStatus === 'true' ? 'Active' : 'Inactive' }}
 					</v-chip>
 				</v-row>
-				<v-row class="text-center text-subtitle-1 my-5" no-gutters>
+				<v-row class="text-center text-subtitle-1 mt-5 mb-10" no-gutters>
 					{{ rocketDescription }}
 				</v-row>
 			</v-col>

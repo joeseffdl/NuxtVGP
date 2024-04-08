@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container fluid class="h-100">
 		<v-container fluid>
 			<div class="d-flex flex-column flex-md-row justify-space-between" no-gutters>
 				<div class="d-flex align-center justify-center justify-md-start ga-2">
@@ -99,13 +99,13 @@
 										? 'text-yellow-accent-4'
 										: 'text-black'
 								"
-								@click="favoritesStore.toggleFavorites(launch.rocket.name)"
+								@click="favoritesStore.toggleFavorites(launch.rocket.rocket.name)"
 							/>
 						</td>
 					</tr>
 				</tbody>
 			</v-table>
-			<v-row class="justify-center mt-5" no-gutters="">
+			<v-row class="justify-center mt-5" no-gutters>
 				There are a total of {{ launches?.length || 0 }} SpaceX launches
 			</v-row>
 		</v-container>
