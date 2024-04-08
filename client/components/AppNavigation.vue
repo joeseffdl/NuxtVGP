@@ -8,8 +8,17 @@
 		style="outline: #9f6a00 3px solid"
 	>
 		<v-app-bar-title>
-			<NuxtLink to="/" class="text-brown-darken-4 text-decoration-none font-weight-light text-h4">
-				Apollo Systems
+			<NuxtLink to="/" style="text-decoration: none">
+				<span class="d-none d-md-flex text-brown-darken-4 font-weight-light text-h4">
+					Apollo Systems
+				</span>
+				<div>
+					<v-icon
+						class="d-md-none text-decoration-none text-h4"
+						color="brown-lighten-1"
+						icon="mdi-rocket-launch"
+					/>
+				</div>
 			</NuxtLink>
 		</v-app-bar-title>
 		<v-row align="center">

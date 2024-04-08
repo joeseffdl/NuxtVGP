@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid>
+	<v-container fluid class="bg-amber-lighten-5" style="min-height: 700px">
 		<BreadCrumbs :items="rocketsBreadcrumbs" />
 		<v-row class="justify-start" wrap no-gutters>
 			<v-col v-for="rocket in rockets" :key="rocket.id" cols="12" lg="6" class="w-50 pa-5">

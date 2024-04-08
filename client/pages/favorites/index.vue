@@ -1,7 +1,7 @@
 <template>
-	<v-container fluid>
+	<v-container fluid class="bg-amber-lighten-5 h-screen" style="min-height: 700px">
 		<BreadCrumbs :items="favoritesBreadcrumbs" />
-		<v-row v-if="!showFavoritesUI" align="center" justify="center" style="height: 525px">
+		<v-row v-if="!showFavoritesUI" align="center" justify="center" class="h-75">
 			<h3>You do not have any favorites at the moment.</h3>
 		</v-row>
 		<v-container v-if="showFavoritesUI">

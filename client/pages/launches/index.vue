@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid class="h-100">
+	<v-container fluid class="bg-amber-lighten-5" style="min-height: 700px">
 		<v-container fluid>
 			<div class="d-flex flex-column flex-md-row justify-space-between" no-gutters>
 				<div class="d-flex align-center justify-center justify-md-start ga-2">
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<v-table>
+			<v-table class="bg-amber-lighten-5" style="height: 580px">
 				<thead>
 					<tr>
 						<th class="text-left">Mission Name</th>
@@ -99,15 +99,16 @@
 										? 'text-yellow-accent-4'
 										: 'text-black'
 								"
+								color="transparent"
 								@click="favoritesStore.toggleFavorites(launch.rocket.rocket.name)"
 							/>
 						</td>
 					</tr>
 				</tbody>
 			</v-table>
-			<v-row class="justify-center mt-5" no-gutters>
-				There are a total of {{ launches?.length || 0 }} SpaceX launches
-			</v-row>
+			<div class="d-flex justify-center align-content-center mt-5" no-gutters>
+				<v-btn variant="tonal" elevation="1" @click="loadMore">Load More</v-btn>
+			</div>
 		</v-container>
 	</v-container>
 </template>
@@ -126,10 +127,15 @@ useHead({
 // Access useFavoriteStore
 const favoritesStore = useFavoriteStore()
 
+// Access usePaginationStore
+const paginationStore = usePaginationStore()
+const paginationLimit = paginationStore.limit
+let paginationOffset = paginationStore.offset
+
 // GraphQL API Query
 const query = gql`
-	query getLaunches {
-		launches {
+	query getLaunches($limit: Int, $offset: Int) {
+		launches(limit: $limit, offset: $offset) {
 			id
 			mission_name
 			launch_site {
@@ -165,44 +171,27 @@ const query = gql`
 		}
 	}
 `
+const { result, fetchMore } = useQuery(query, () => ({
+	limit: paginationLimit,
+	offset: paginationOffset,
+}))
 
-const { data } = useAsyncQuery<{
-	launches: {
-		id: string
-		mission_name: string
-		launch_site?: {
-			site_id: string
-			site_name: string
-			site_name_long: string
-		}
-		launch_date_utc: Date
-		details?: string
-		rocket: {
-			rocket: {
-				id: string
-				name: string
-				active: boolean
-				country: string
-				description: string
-				diameter: {
-					feet: number
-					meters: number
-				}
-				first_flight: Date
-				height: {
-					feet: number
-					meters: number
-				}
-				mass: {
-					kg: number
-					lb: number
-				}
-				stages: number
+function loadMore() {
+	paginationOffset += 10
+	fetchMore({
+		variables: {
+			offset: paginationOffset,
+		},
+		updateQuery: (previousResult, { fetchMoreResult }) => {
+			const newlyFetchedLaunches = fetchMoreResult.launches
+			return {
+				launches: [...previousResult.launches, ...newlyFetchedLaunches],
 			}
-		}
-	}[]
-}>(query)
-const launches = computed(() => data.value?.launches ?? [])
+		},
+	})
+}
+
+const launches = computed(() => result.value?.launches ?? [])
 
 // Filtering Composable
 const { filteredLaunches, selectedYear, availableYears } = useFilterDateByYear(launches)

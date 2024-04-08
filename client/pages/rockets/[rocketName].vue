@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid class="h-100">
+	<v-container fluid class="bg-amber-lighten-5" style="min-height: 700px">
 		<BreadCrumbs :items="breadcrumbs" />
 		<v-row class="d-flex flex-column align-content-center justify-center mt-2">
 			<div class="font-weight-medium text-uppercase" style="font-size: 7rem">
