@@ -1,27 +1,28 @@
 <template>
 	<v-app-bar
 		name="app-bar"
-		color="transparent"
+		color="amber-lighten-5"
 		scroll-behavior="hide"
 		scroll-threshold="150"
 		:elevation="0"
+		style="outline: #9f6a00 3px solid"
 	>
 		<v-app-bar-title>
-			<NuxtLink to="/" color="black">
-				<v-icon icon="mdi-rocket-launch" size="40" />
+			<NuxtLink to="/" class="text-brown-darken-4 text-decoration-none font-weight-light text-h4">
+				Apollo Systems
 			</NuxtLink>
 		</v-app-bar-title>
 		<v-row align="center">
 			<NuxtLink
 				v-for="item in navigation"
 				:key="item.name"
-				class="mx-5 text-decoration-none"
-				color="black"
+				:class="{
+					'mx-5 text-decoration-none text-brown font-weight-bold': item.current,
+					'mx-5 text-decoration-none text-black font-weight-light': !item.current,
+				}"
 				:to="item.href"
 			>
-				<strong>
-					{{ item.name }}
-				</strong>
+				{{ item.name }}
 			</NuxtLink>
 		</v-row>
 	</v-app-bar>
@@ -36,17 +37,3 @@ const navigation = [
 	{ name: 'Favorites', href: '/favorites', current: route.name === 'favorites' },
 ]
 </script>
-
-<style scoped>
-.container {
-	display: flex;
-	justify-content: center;
-	background: #000;
-}
-
-.navigation-container {
-	max-width: 1200px;
-	margin: auto;
-	height: 100px;
-}
-</style>
