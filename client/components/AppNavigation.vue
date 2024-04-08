@@ -16,11 +16,10 @@
 			<NuxtLink
 				v-for="item in navigation"
 				:key="item.name"
-				:class="{
-					'mx-5 text-decoration-none text-brown font-weight-bold': item.current,
-					'mx-5 text-decoration-none text-black font-weight-light': !item.current,
-				}"
 				:to="item.href"
+				class="mx-5 text-black text-decoration-none font-weight-light"
+				:class="{ 'text-brown font-weight-bold': $route.path === item.href }"
+				exact
 			>
 				{{ item.name }}
 			</NuxtLink>
